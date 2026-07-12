@@ -19,12 +19,6 @@ Chaque tache planifiee (9h00 courte duree, 9h20 et 13h00 T2) termine par
 Pages redeploie. Rien a pousser = sortie silencieuse. Journal :
 `publier.log` (exclu du depot). Mise a jour manuelle : `python publier.py`.
 
-## Pourquoi GitHub Pages et pas Netlify
-
-Le compte Netlify (tarification a credits, 300/mois pour tout le compte,
-15 credits par deploiement) est reserve a Champigrond. GitHub Pages :
-pushes illimites, gratuits. Decision du 2026-07-12.
-
 ## REPO PUBLIC - regles de confidentialite
 
 GitHub Pages gratuit exige un depot public. En consequence :
