@@ -67,10 +67,14 @@ def main():
         log(f"ECHEC git add/diff : {e}")
         return
 
-    # 3. Commit + push
+    # 3. Commit + pull --rebase + push
+    # Le pull --rebase absorbe un commit fait directement sur GitHub
+    # (edition web) : sans lui, chaque push serait rejete "fetch first"
+    # et le site resterait fige en silence (vecu du 13 au 15 juillet 2026).
     try:
         stamp = datetime.now().strftime("%Y-%m-%d %H:%M")
         git("commit", "-m", f"Mise a jour automatique des annonces ({stamp})")
+        git("pull", "--rebase")
         git("push")
         log("Site pousse sur GitHub - Pages va redeployer.")
     except subprocess.CalledProcessError as e:

@@ -204,9 +204,13 @@ function initTable() {
       const rows = Array.from(tbody.querySelectorAll('tr'));
       rows.sort((a, b) => {
         const va = a.children[col].dataset.v, vb = b.children[col].dataset.v;
-        const na = parseFloat(va), nb = parseFloat(vb);
+        // Comparaison numerique seulement si TOUTE la valeur est un nombre :
+        // parseFloat("2026-07-11") vaut 2026, ce qui rendait toutes les dates
+        // egales entre elles et figeait le tri par date. Les dates ISO se
+        // trient correctement en comparaison de chaines.
+        const numRe = /^-?\d+(\.\d+)?$/;
         let cmp;
-        if (!isNaN(na) && !isNaN(nb)) cmp = na - nb;
+        if (numRe.test(va) && numRe.test(vb)) cmp = parseFloat(va) - parseFloat(vb);
         else cmp = String(va).localeCompare(String(vb), 'fr');
         return asc ? cmp : -cmp;
       });
